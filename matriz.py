@@ -1,7 +1,8 @@
 from __future__ import annotations 
 from random import randint, random
-
-
+import math
+def sigmoid(x):
+    return 1 / (1 + math.exp(-x))
 
 class Matriz:
     def __init__(self, rows,cols) -> None:
@@ -28,11 +29,30 @@ class Matriz:
                 n = random() * 2 - 1
                 arr.append(n)
             self.data.append(arr)
+    
+
+    def print(self):
+        print(self.data)
+    
+
+    def arryToMatrix(arr):
+        matriz = Matriz(len(arr), 1)
+
+        for i in range(len(arr)):
+            matriz.data[i][0] = arr[i]
+        
+        return matriz
+    
+
+    def set_sigmoid(self):
+        for i in range(self.rows):
+            for j in range(self.cols):
+                self.data[i][j] = sigmoid(self.data[i][j])
 
 
     
 
-    def add(A: Matriz, B : Matriz):
+    def add(A: Matriz, B : Matriz) -> Matriz:
         matriz =  Matriz(A.rows,B.cols)
 
         for i in range(len(A.data)):
@@ -44,7 +64,7 @@ class Matriz:
 
 
 
-    def sub(A: Matriz, B : Matriz):
+    def sub(A: Matriz, B : Matriz) -> Matriz:
         matriz =  Matriz(A.rows,B.cols)
 
         for i in range(len(A.data)):
@@ -53,9 +73,9 @@ class Matriz:
         
         return matriz
     
-    def mult(A: Matriz, B: Matriz):
-        if A.cols != B.rows:
-            raise ValueError("Numero de colunas do A não é igual ao número de linhas do B")
+    def mult(A: Matriz, B: Matriz) -> Matriz:
+        #if A.cols != B.rows:
+            #raise ValueError("Numero de colunas do A não é igual ao número de linhas do B")
         
         result = Matriz(A.rows, B.cols)
         
@@ -72,26 +92,5 @@ class Matriz:
 
 #self.data[id_i][id_n] = self.data[id_i][id_n] + b.data[id_i][id_n]
 
-
-
-m1 = Matriz(2,2)
-m2 = Matriz(2,2)
-
-m1.rand()
-m2.rand()
-
-
-print(m1.data)
-print(m2.data)
-
-
-m3 = Matriz.add(m1,m2)
-m4 = Matriz.sub(m1,m2)
-m5 = Matriz.mult(m1,m2)
-
-print("============================")
-print(f"Soma: {m3.data}")
-print(f"Subtração: {m4.data}")
-print(f"Multiplicação: {m5.data}")
 
     
